@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for tasks'
+define service Z114_SD_Tasks {
+  expose Z114_C_Tasks;
+  expose Z114_C_TaskItems;
+}

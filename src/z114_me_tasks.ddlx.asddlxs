@@ -1,0 +1,55 @@
+@Metadata.layer: #CORE
+@UI.headerInfo:{ typeName: 'Task', typeNamePlural: 'Tasks' }
+@UI.headerInfo:{ title:{ type: #STANDARD, value: 'Uuid' } }
+@UI.headerInfo:{ description:{ type: #STANDARD, value: 'TaskName' } }
+@Search.searchable: true
+annotate entity Z114_C_Tasks with
+{
+  @UI.facet: [{ id:'tasks',
+                type: #IDENTIFICATION_REFERENCE,
+                label: 'Task',
+                position: 10 },
+
+              { id:'subtask',
+                type: #LINEITEM_REFERENCE,
+                label: 'Subtasks',
+                position: 20,
+                targetElement: '_TaskItems' }]
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  @UI.hidden: true
+  Uuid;
+
+  @UI.lineItem: [{ position: 20 }]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.7
+  @UI.identification: [{ position: 20 }]
+  TaskName;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  @Consumption.valueHelpDefinition: [{ entity:{ name: 'Z114_Status', element: 'value_low' } }]
+  OverallStatus;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.identification: [{ position: 40 }]
+  CreatedBy;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.identification: [{ position: 50 }]
+  CreateOn;
+
+  @UI.lineItem: [{ position: 60 }]
+  @UI.identification: [{ position: 60 }]
+  LastChangedBy;
+
+  @UI.lineItem: [{ position: 70 }]
+  @UI.identification: [{ position: 70 }]
+  LastChangeOn;
+
+  @UI.identification: [{ position: 80 }]
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+}

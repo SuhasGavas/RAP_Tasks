@@ -1,0 +1,53 @@
+@Metadata.layer: #CORE
+annotate entity Z114_C_TaskItems with
+{
+  @UI.facet: [{ id:'taskitems',
+                type: #IDENTIFICATION_REFERENCE,
+                label: 'TaskItem',
+                position: 10 }]
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  @UI.hidden: true
+  Uuid;
+
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  @UI.hidden: true
+  TaskUuid;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  SubtaskName;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.identification: [{ position: 40 }]
+  @Consumption.filter:{ mandatory: true }
+  DueDate;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.identification: [{ position: 50 }]
+  Status;
+
+  @UI.lineItem: [{ position: 60 }]
+  @UI.identification: [{ position: 60 }]
+  CreatedBy;
+
+  @UI.lineItem: [{ position: 70 }]
+  @UI.identification: [{ position: 70 }]
+  CreateOn;
+
+  @UI.lineItem: [{ position: 80 }]
+  @UI.identification: [{ position: 80 }]
+  LastChangedBy;
+
+  @UI.lineItem: [{ position: 90 }]
+  @UI.identification: [{ position: 90 }]
+  LastChangeOn;
+
+  @UI.lineItem: [{ position: 100 }]
+  @UI.identification: [{ position: 100 }]
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+}

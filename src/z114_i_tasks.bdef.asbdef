@@ -1,0 +1,68 @@
+managed implementation in class zbp_114_i_tasks unique;
+//strict ( 2 );
+
+define behavior for Z114_I_Tasks alias Tasks
+persistent table z114_tasks
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) Uuid;
+  field ( readonly ) CreatedBy, CreateOn, LastChangedBy, LastChangeOn, LocalLastChangedAt;
+
+  validation valTaskStatus on save { create;update; field OverallStatus; }
+
+  determination detTaskStatus on save {create;}
+
+  association _TaskItems { create; }
+
+  mapping for z114_tasks
+    {
+      Uuid               = uuid;
+      TaskName           = task_name;
+      OverallStatus      = overall_status;
+      CreatedBy          = created_by;
+      CreateOn           = create_on;
+      LastChangedBy      = last_changed_by;
+      LastChangeOn       = last_change_on;
+      LocalLastChangedAt = local_last_changed_at;
+    }
+}
+
+define behavior for Z114_I_TaskItems alias TaskItems
+persistent table z114_task_items
+lock dependent by _Tasks
+authorization dependent by _Tasks
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TaskUuid;
+
+  field ( numbering : managed, readonly ) Uuid;
+  field ( readonly ) CreatedBy, CreateOn, LastChangedBy, LastChangeOn, LocalLastChangedAt;
+
+  validation valTaskItemStatus on save { create;update; field Status; }
+
+  determination detTaskItemStatus on save { create; }
+
+  association _Tasks;
+
+  mapping for z114_task_items
+    {
+      Uuid               = uuid;
+      TaskUuid           = task_uuid;
+      SubtaskName        = subtask_name;
+      DueDate            = due_date;
+      Status             = status;
+      CreatedBy          = created_by;
+      CreateOn           = create_on;
+      LastChangedBy      = last_changed_by;
+      LastChangeOn       = last_change_on;
+      LocalLastChangedAt = local_last_changed_at;
+    }
+}
